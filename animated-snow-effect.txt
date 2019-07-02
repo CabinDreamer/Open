@@ -1,0 +1,173 @@
+How to Add an Animated Snow Effect to Your Holiday Email Campaigns
+
+Inboxes are always jammed up with holiday emails – there’s a lot of competition. So, how can you make your email marketing campaigns stand out from the rest? Try adding a bit of holiday cheer to your regular emails by creating some animated snow using CSS.
+
+Here’s what the effect looks like on a recent Email on Acid newsletter:
+
+Setting Up the CSS Animation
+
+The snow effect is essentially a snowflake or shape in a div that you animate using CSS. This technique moves the image from the top to the bottom of a container div you place around your email tables.
+
+CSS animations work on a range of email clients including iOS, Apple Mail, Android Native Mail and Outlook for Mac – check out the Email on Acid ultimate guide to CSS animation for more information. The snow animation won’t display on other email clients, so you don’t need to provide a fallback.
+
+First, we set up the media query to detect the webkit, that will support the CSS animation.
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+}
+
+Next, we set up the container the snow will be in.
+
+.snowcontainer{
+  position:relative;
+  width:100%;
+  overflow:visible;
+}
+
+We then need to define the snow. The simplest way to do this is to use a shape that doesn’t need an image, such as a square. You can create a square by setting height: 18px by width: 18px and setting a border-radius that is half the height (to gain a perfect circle), border-radius: 9px. Set the position:absolute  so the snow will be positioned within the container and top: -20px to start the animation before it enters the snowcontainer. Finally, add a background-color to set the color of the shape.
+
+It looks like this:
+
+[ shape snowflake ]
+
+Here’s the code for the shape snowflake:
+
+.snow{
+            height: 18px;
+            border-radius: 9px;
+            width: 18px;
+            position: absolute;
+            top: -20px;
+            background-color: #ffffff;
+      }
+      
+Another way to add a snowflake is to add a background image. This technique is similar to to the square technique above, but it uses a background-image and no border-radius. With these changes, the snowflake will appear like this:
+
+snowflake image
+
+Here’s the code for the image snowflake:
+
+.snowimage{
+  /* size of image */
+  height:18px;
+  width:18px;
+  /* absolute - relative to the container div */
+  position:absolute;
+  /* Where animation starts */
+  top:-20px;
+  /* image link */
+  background-image:url('images/snowflake.png');
+}
+Setting the background-image as a .png means the snowflake will have a transparent background and show the content through it. If you need some snowflake inspiration, check out the Noun Project’s snowflake icons.
+
+With the code as is, we just have some shapes within a <div>. To animate them, we can put together a shortened version of an animation. See below:
+
+.snow1{
+  animation: snow1 5s linear 0s infinite;
+ }
+ /* animation: Name of animation / length of animation / timing function 
+(linear = same speed from beginning to end) / delay (time between 
+animation end and start) / number of times */
+This animation is called snow1. We define the length of the animation as 5s (five seconds) and the linear timing function. The linear timing number keeps the animation the same speed throughout – 0s (zero seconds) is the delay before the animation starts again. Finally, we include the number of times the animation will run (infinite).
+
+By creating a few different animations with slightly different lengths and delay time, the snow will fall at random.
+
+.snow2{
+  animation: snow2 6s linear 1s infinite;
+ }
+ .snow3{
+  animation: snow3 7s linear 2s infinite;
+ }
+Next, we set up the keyframe animations to dictate where the snowflake will move to and from.
+
+@keyframes snow1
+ {
+  0% { top:0%;left:50%; }
+  100% { top:100%;left:65%; }
+ }
+At the start of the animation (0%), we position the snowflake at the top of the div (0%) and 50% from the left. At the end of the animation (100%) the snowflake is 100% from the top and 65% from the left.
+
+By setting the start and end points slightly different in each animation, the snow will seem to appear more at random.
+
+@keyframes snow2
+ {
+  0% { top:0%;left:30%; }
+  100% { top:100%;left:25%; }
+ }
+ @keyframes snow3
+ {
+  0% { top:0%;left:70%; }
+  100% { top:100%;left:60%; }
+ }
+snowflake animation
+
+The HTML for the Snowflake Animation
+Once you’ve created the CSS animation, you’ll need to add this effect to your email using HTML. To create this animation technique, the first bit of HTML you need is a <div> to open the snow container. You can set the height and width of the container to establish where the snow will show. For example:
+
+<div class="snowcontainer" style="width: 100%; height: 500px;">
+Next, each individual snowdrop needs to be set. To do this, start with a <div> with the class of the snowimage or snow as set up in your CSS. Follow that with the name of the animation (e.g. snow1). The code should look like this:
+
+<div class="snowimage snow1"></div>
+Then, add in all the snowdrops and animations within the snow container. See below:
+
+<div class="snowcontainer" style="height: 500px;">
+  <div class="snowimage snow1"></div>
+  <div class="snow snow2"></div>
+  <div class="snow snow3"></div>
+Place all your email content you would like below your snowdrops and finish with a closing </div> to end the snowcontainer.
+
+To see the snow in action, check out the full code here.
+
+Show Us What You’ve Got!
+Have you tried this animation in one of your holiday emails? Let us know how it went or, better yet, show us! Share your experience in the comments section below or reach out on Facebook or Twitter.
+
+
+AUTHOR: JAY ORAM
+Jay Oram is part of the design and code solutions team at the email specialist agency, ActionRocket. In his role at ActionRocket, Jay is usually experimenting with new code for emails or finding that elusive rendering fix. See more articles from Jay at emaildesignreview.com or find him on Twitter at @emailjay_.
+
+11 thoughts on “How to Add an Animated Snow Effect to Your Holiday Email Campaigns”
+Phil Rinaldi says:
+December 4, 2018 at 10:55 am
+This tutorial is fantastic! Just in time for the Holiday. I’m having some trouble getting it to work in the actual e-mail clients. I’ve tried viewing it in Google and Hotmail and the snowflakes just sit at the top of the e-mail. Any tips? Thank you!
+
+Anne says:
+December 4, 2018 at 3:46 pm
+You can find the email client support list in this blog post from 2016.
+https://www.emailonacid.com/blog/article/uncategorized/css-animations-part-1/
+It doesn’t look like support has changed much per my litmus testing.
+
+Melanie Graham says:
+December 4, 2018 at 4:12 pm
+Hi Phil – Anne’s comment below is correct! This should work in iOS, Apple Mail, Android Native Mail and Outlook for Mac.
+
+Silvia says:
+December 7, 2018 at 8:55 am
+Hello,
+
+I have the same problem.I’m testing the code with Litmus and the snowflakes sit at the top of the email for Outlook, Outlook iOS and Samsung Mail. Any suggestions?
+
+Albert Covington says:
+December 11, 2018 at 9:27 am
+Same thing happens to me. Any help would be appreciated.
+
+Jay Oram says:
+December 12, 2018 at 3:21 am
+Hey everyone – glad you are enjoying the post. The snowflakes only work in the clients I mentioned – iOS, Apple Mail, Android Native Mail and Outlook for Mac. Check out the support list Anne shared as well.
+
+For Outlook you could hide the at the top within mso conditional comments or within the style tag style=” mso-hide:all;” as you would with other parts fo your email you do not want to show in Outlook. In terms of what you could do, adding a snowy background image to your email, including images as gifs with snow animated over the top. But unfortunately adding just CSS animation won’t work in Outlook and clients that don’t support it.
+
+Dan Emberson says:
+December 5, 2018 at 5:31 am
+Just wanted to say thank you for this. It looks really great!
+
+Melanie Graham says:
+December 5, 2018 at 8:26 am
+You got it, Dan! Happy to hear you enjoy it. Thanks!
+
+Shawn says:
+December 13, 2018 at 3:47 pm
+Is there an easy way to make the animation appear over images? Right now, it seems to go behind images. I imagine i can change images to be background images and that would work, but support for background images is limited and it’s more complicated this way. Is there an easier solution?
+
+Olivia Clemmons says:
+December 14, 2018 at 10:39 am
+This tutorial is fantastic! I’m having trouble creating more than three snowflakes though. I added four more snowflakes in the CodePen builder you linked to, and they display successfully. However, when I add that code to my email in Marketing Cloud, it will only display the original three snowflakes. Any tips?
+
